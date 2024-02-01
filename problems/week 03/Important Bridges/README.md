@@ -1,0 +1,7 @@
+# Important Bridges - solution
+
+A _biconnected graph_ is a connected and "nonseparable" graph, meaning that if any one vertex were to be removed, the graph would remain connected. A graph with only two vertices connected by an edge is still biconnected because, by removing one node, the remaining node will be connected to the rest of the graph (that is, itself).
+
+A _biconnected component_ is a maximal biconnected graph. The function defined in `#include <boost/graph/biconnected_components.hpp>` can be used to find all the biconnected components in a graph. The function outputs the number of biconnected components and modifies an edge property map. For this reason, it's necessary to define a property of the edges of the graph, which may be `boost::edge_name_t` or `boost::edge_weight_t`, and it's not possible to use a normal integer array as it can be used when finding the connected components of a graph.
+
+An important bridge is a biconnected component that is composed of only one edge, meaning that the two vertices that are connected by that edge will be separated by its removal. It is possible to see which are the important bridges by searching for the biconnected components with only one edge and outputting them in the correct order.
