@@ -1,0 +1,7 @@
+# Beach Bars - solution
+
+It is a sliding window problem, moving the bar position from one end to the other of the beach while counting the number of parasols and the maximum distance to a parasol inside the current window.
+
+It is necessary to save in a vector all the locations with the same best characteristics. The best location has the maximum amount of parasols with the minimum maximum walking distance. Given a new location, it replaces the old one if there are more parasols inside the window or, if the number of parasols inside the window is the same, if the maximum walking distance is smaller. When a replacement happens, all the previous solutions must be erased because they were equivalent to the one just replaced.
+
+It is possible to start positioning the bar at the same position as the furthest left parasol and find the number of parasols in the right 100 positions (half of the window, on the right of the bar). Starting from this position, all the locations until the last parasol is reached are considered. If a parasol exits the window from the left, it is removed from the count. If a new parasol enters the window from the right, a parasol is added to the count. After each movement of the bar, it is necessary to find the new maximum distances and to check if the current position is one of the best ones or not.
