@@ -1,0 +1,5 @@
+# The Great Game - solution
+
+The same positions on the board can be reached after different combinations of moves, but the two players have different goals, which means that DP is needed. Holmes (0) wins if the **red** meeple reaches the end; Moriarty (1) wins if the **black** meeple reaches the end, which means that the best move for the two players in a given moment may not be the same.
+
+If a player needs to do the best move possible, he needs to minimize the number of steps to reach the goal, considering that, from the landing position, the other player will perform the worst move possible, meaning that he will maximize the number of steps to reach the goal. Similarly, when a player needs to perform the worst move, he needs to consider that the other player will perform the best move possible from the landing position.
