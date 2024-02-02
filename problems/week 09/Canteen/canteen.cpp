@@ -85,7 +85,7 @@ int main(){
     boost::successive_shortest_path_nonnegative_weights(G, source, sink);
 
     //Profit is the negative of the remaining cost
-    int cost = 20*students - boost::find_flow_cost(G);
+    int profit = 20*students - boost::find_flow_cost(G);
 
     if(students >= tot_s){
       std::cout<<"possible ";
@@ -93,6 +93,6 @@ int main(){
       std::cout<<"impossible ";
     }
 
-    std::cout<<students<<" "<<cost<<"\n";
+    std::cout<<students<<" "<<profit<<"\n";
   }
 }
