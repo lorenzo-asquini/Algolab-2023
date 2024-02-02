@@ -1,0 +1,3 @@
+# Antenna - solution
+
+Trivial solution.
