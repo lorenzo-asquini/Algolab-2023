@@ -1,0 +1,14 @@
+# Hiking Maps - solution
+ 
+The map parts that need to be purchased are chosen in such a way that a leg of the hike is completely contained in at least one map part, so there is no need to worry about partial coverage of some legs.
+
+For every pair of points lying on a side of the triangle, it is necessary to create a line. With the resulting three lines, it is possible to construct the intersections between them that are the vertices of the triangle. The most intuitive way to know if a point is contained inside a triangle would be to use `triangle.has_on_bounded_side(point)` and `triangle.has_on_boundary(point)`. However, this is not fast enough for the last test cases because creating and considering the entire triangle is costly. For this reason, it is possible to use the cheaper orientations. Given a point $s$ and two vertices of the imaginary triangle $v1$ and $v2$, it is possible to determine the orientation with `CGAL::orientation(v1, v2, s)`, which could be Counter _Clock Wise (CCW)_, _Clock Wise (CW)_ or _Collinear_:
+- If the orientation is CCW, it means that when moving from point $v1$ to point $v2$ to point $s$$ in that order, there is a left turn (`CGAL::LEFT_TURN`, which is a positive constant).
+- If the orientation is CW, it means that when moving from point $v1$ to point $v2$ to point $s$ in that order, there is a right turn (`CGAL::RIGHT_TURN`, which is a negative constant).
+- If the three points $v1$, $v2$, and $s$ are collinear, it means that they lie on the same straight line (`CGAL::COLLINEAR`, which is constant with value 0).
+
+At this point, if all three orientations (that come from considering all three pairs of vertices and the same point) have the same sign (including 0), then it is possible to say that the point would be contained by the triangle.
+
+With the information about the points, it is possible to know if a leg is contained in a triangle if two consecutive points are contained in that triangle.
+
+To determine the best choice of map parts, it is necessary to use the sliding window technique. A single leg may be covered by two map parts, and removing one of the two parts would not result in that leg not being covered. For this reason, it is possible to create a vector with size $m-1$ that contains a counter for the number of maps covering the leg $i$ and a counter for all the single legs covered. When adding a map part, it is possible to increase the counter of all legs covered only if that leg is covered by that part only (so the leg counter becomes 1). When removing a map part, it is possible to decrease the counter of all legs covered if the leg was covered by that part only (so the leg counter becomes 0). Every time the counter of all legs covered is equal to $m-1$, it is possible to check if the number of maps is lower than the previous best.
