@@ -1,0 +1,9 @@
+# London - solution
+
+All the pairs of letters that the newspaper pieces can form are stored in an array of size `26*26`, counting how many times each pair is present in the newspaper. Each pair is formed by the letter in the front and the corresponding letter in the back of the newspaper (making sure to choose the correct letter from the back). The pairs of letters are linked to the indexes of the array by mapping each letter to the range `0-25` by removing `'A'` from their value (so the letter `A` is mapped to `0`). Then the index in the array can be found by using the formula `l1 * 26 + l2`.
+
+The frequency of the letters in the note is determined. To find the index of the array, the letters can be mapped as above.
+
+After creating a graph that can be used to calculate the max flow, from the source to each pair of letters of the newspaper, the edge has capacity equal to the number of occurrences of that pair (it's possible to use a specific pair for a maximum of time equal to its occurrences). Each pair has two edges connecting it to the two letters that form it. Each edge has a capacity equal to the number of occurrences of that pair. This means that each pair can be used up to `k` times, for one letter on the note or the other. The incoming edge in the pair node makes sure that the pair is not used too many times. Each letter in the note is connected to the sink with an edge with a capacity equal to the number of occurrences of that letter in the note. This means that the flow will be the maximum number of letters that can be represented from the pairs.
+
+It's possible to form the note if the final flow is equal to the number of letters in the note.
