@@ -10,7 +10,7 @@ Firstly, it's necessary to populate the DP table with the value when considering
 
 At this point, the array is filled with the best power that can be achieved, considering only one potion among the first `i` A potions that grants at least `h` happiness.
 To populate the rest of the DP table, consider iteratively `j` potions at the time out of all possible potions, for each possible value of `h`, considering that the `j` potions are out of `i` total potions (`i` denotes out of how many A potions those `j` potions are considered):
-- out how the happiness would be if the previous A potion was not taken. Then try to see if it's better to just skip the current potion or take the current potion instead of the previous one (replacing the previous one means considering the case when `i-1` A potions are considered and `j-1` of them are taken).
+- Out how the happiness would be if the previous A potion was not taken. Then try to see if it's better to just skip the current potion or take the current potion instead of the previous one (replacing the previous one means considering the case when `i-1` A potions are considered and `j-1` of them are taken).
 
 At this point, all the cells `power[j][n][H]` contain the maximum power achievable by taking `j` potions while satisfying the happiness `H`. Sort the B potions by their wit, with potions with higher wit first. This is needed because the B potions are chosen using a greedy approach, while the A potions cannot be chosen using a greedy approach because there are two parameters to consider.
 
