@@ -1,0 +1,13 @@
+# Dean Thomas - solution
+
+Create a triangulation with the dementors' positions. Each face of the triangulation should contain a pair of pieces of information, where the first value is a boolean that is used to know if the current face was already considered, and the second value contains the safe distance squared. It's also necessary to create a priority queue that contains pairs, where the first value of the pair is the safe distance squared of a face, and the second value is the face itself.
+
+For each finite face of the triangulation, calculate and save as the face information the distance to the Voronoi point associated with the current face. For each infinite neighbor of the current face, find the length of the edge that is necessary to traverse to go from the current face to the infinite face. This value may replace the safest distance for the current face calculated previously if it's bigger than it. It may be safer (meaning that the distance to a dementor may be higher) to remain inside a face than to try to exit the face. The current face is then added to the queue.
+
+While the queue is not empty, if the current face was not considered previously, iterate over all finite neighbor faces. For each finite neighbor of the current face, calculate the limiting safe distance that would result from going from the neighboring face to the current face. This distance is the minimum between the edge that is necessary to traverse to reach the current face and the safest distance in the current face (the limiting factor may be going from the neighbor to the current face or being the current face itself). At this point, the safest distance in the neighbor face is the maximum between the previous safest distance in the neighbor face and the limiting safe distance found previously (this allows to determine if it's safer to go to the current face or if it's better to remain in the neighbor face). The neighbor is added to the queue, and the current face is marked as traversed.
+
+For each fugitive, it's necessary to calculate its safe distance during the day. In order to avoid overflows, the best way to do this is:
+```
+CGAL::squared_distance(P(0, 0), P(s + d, 0));
+```
+At this point, it's necessary to find out if the fugitive is already too close to a dementor (`n`), if it's already in an infinite face ('y'), or if the current face has a good enough safe distance (the safe distance must be higher than `4*r` to be safe also during the night).
