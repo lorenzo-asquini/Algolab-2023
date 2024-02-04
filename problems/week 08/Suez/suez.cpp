@@ -90,7 +90,7 @@ int main(){
       //a1 < (2*(x2-x1) - w)/w
       //Absolute value of (x2-x1) to consider all cases automatically
 
-      IT min_bound = IT(1234567890);
+      IT min_bound(1234567890);
       for(int j = 0; j < m; j++){
         int x_dist_2 = 2*(abs(new_posters[i].x - old_posters[j].x)) - w;
         int y_dist_2 = 2*(abs(new_posters[i].y - old_posters[j].y)) - h;
@@ -102,7 +102,6 @@ int main(){
       }
       if(m > 0){  //Avoid inserting an incorrect constraint
         lp.set_u(i, true, min_bound);
-        in_number++;
       }
     }
 
