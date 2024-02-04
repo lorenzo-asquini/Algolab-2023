@@ -1,6 +1,6 @@
 # DHL - solution
 
-# Method 1
+## Method 1
 
 Keep in mind that this method is not fast enough for the last test case, which, however, is worth only 1 point.
 
@@ -12,6 +12,6 @@ To populate the DP table, for the remaining boxes in stack A ($2$ to $n$), for t
 
 The idea that allows to solve the problem easily is that the optimal solution involves taking only one box from a stack and any feasible amount from the other stack. This is because it's better to sum little multiplications than have fewer larger multiplications.
 
-# Fast method
+## Fast method
 
 Black magic.
