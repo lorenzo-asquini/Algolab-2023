@@ -1,0 +1,9 @@
+# On Her Majesty's Secret Service - solution
+
+Firstly, it's necessary to create a weighted directed graph containing all the nodes (including agents and shelters), the slopes, and the lifts, which are represented by two edges in the two directions.
+
+For each agent, find how much time it takes for it to reach the different shelters using Dijkstra. If the time is not `INT_MAX`, that means that the agent cannot reach such a shelter. Create an edge that connects the agent to the shelter that considers both the time needed to reach the shelter and the time to enter the password. If the shelters can contain two people, create another edge that considers the case where the agent is the second one to arrive, so the time to enter is equal to the time to reach the shelter, plus the time it takes the first agent to enter the password, plus the time it takes the current agent to enter the password.
+
+At this point, it's necessary to find out how much time is needed to have all agents reach a shelter. It's possible to imagine the graph as one that contains an edge that connects an agent to all the shelters he can reach. This easily leads to the correct solution if there are enough edges to have a maximum cardinality matching with an equal amount of edges to the number of agents. This, obviously, would be possible if all these edges were present. However, it's necessary to use the least amount of edges that allow all agents to reach a destination, considering only the edges with time to reach a shelter and enter it less than a threshold.
+
+To quickly find the cut-off time that is used to know if an edge needs to be considered or not, it's possible to use a binary search of times between `0` and `INT_MAX`. If not all the agents are connected, it's necessary to give them more time. If all the agents are connected, it's possible to try using less time.
